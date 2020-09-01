@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+  infotech:
+    build: .
+    image: 'infotech:dev'
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/src
+    depends_on:
+      - mongo
+    environment:
+      - STORAGE_TYPE=persistent
+      - CONNECTION_STRING=mongodb://mongo:27017
+    command:
+      - run
+      - start
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
